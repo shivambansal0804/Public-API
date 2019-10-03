@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('throttle:60,1')->group(function () {
-    Route::get('/', function () {
-        return 12;
-    });
+	Route::get('stories','StoryController@index');
+
+	Route::get('story/{id}','StoryController@show');
 });
