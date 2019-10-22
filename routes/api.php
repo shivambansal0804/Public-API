@@ -19,4 +19,12 @@ Route::middleware('throttle:60,1')->group(function () {
 	Route::get('story/{id}','StoryController@show');
 
 	Route::get('storyImage/{storyId}','ImageController@show');
+
+	Route::get('gallery','galleryController@index');
+
+	Route::get('gallery{slug}','galleryController@show');
+
+	Route::get('societies','SocietyController@index');
+
+	Route::get('society{id}','SocietyController@show');
 });
