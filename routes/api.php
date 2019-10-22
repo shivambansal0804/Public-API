@@ -22,9 +22,9 @@ Route::middleware('throttle:60,1')->group(function () {
 
 	Route::get('gallery','galleryController@index');
 
-	Route::get('gallery{slug}','galleryController@show');
+	Route::get('gallery/{slug}','galleryController@show');
 
 	Route::get('societies','SocietyController@index');
 
-	Route::get('society{id}','SocietyController@show');
+	Route::get('society/{id}','SocietyController@show');
 });
