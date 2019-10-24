@@ -51,6 +51,7 @@ class galleryController extends Controller
         $subs = $album->child()->with('user')->get();
 
         $image_urls=[];
+        $sub_urls = [];
         foreach($images as $url){
             array_push($image_urls,
 
@@ -63,6 +64,16 @@ class galleryController extends Controller
         );
             
     }
+    foreach ($subs as $subItem){
+            array_push($sub_urls,
+            [
+                'url' => $subItem->getFirstMediaUrl('covers','thumb'),
+                'name'=> $subItem->name,
+                'slug' => $subItem->slug,
+            ]
+            );
+
+    }
 
 
         $album_Object = 
@@ -71,8 +82,9 @@ class galleryController extends Controller
             'slug' => $album->slug,
             'album_id'=> $album->album_id,
             'status' => $album->status,
-            'album_imgUrl'=> $album->getFirstMediaUrl('cover', 'cover'),
+            'album_imgUrl'=> $album->getFirstMediaUrl('covers', 'cover'),
             'image_info'=> $image_urls,
+            'subs_info'=> $sub_urls,
             
     ];
 
