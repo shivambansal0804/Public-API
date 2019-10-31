@@ -17,7 +17,7 @@ class StoryController extends Controller
      */
     public function index()
     {
-        $stories = Story::paginate(10);
+        $stories = Story::where('status','published')->get();
 
         return StoryResource::collection($stories);
     }
@@ -31,6 +31,16 @@ class StoryController extends Controller
     {
         $story = Story::findorFail($id);
 
-        return $story;
+        $ret_object = [
+            'id' => $story->id,
+            'title' => $story->title,
+            'biliner' => $story->biliner,
+            'slug' => $story->slug,
+            'status' => $story->status,
+            'imgUrl'=> $story->getFirstMediaUrl('blog_images', 'fullscreen'),
+            'created_at' => $story->created_at
+        ];
+
+        return $ret_object;
     }
 }
