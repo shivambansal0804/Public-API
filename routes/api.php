@@ -25,4 +25,8 @@ Route::middleware('throttle:60,1')->group(function () {
 	Route::get('society','SocietyController@index');
 
 	Route::get('society/{slug}','SocietyController@show');
+
+	Route::get('user','UserController@index');
+
+	Route::get('user/{id}','UserController@show');
 });
