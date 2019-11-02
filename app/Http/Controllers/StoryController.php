@@ -43,6 +43,6 @@ class StoryController extends Controller
             'created_at' => $story->created_at
         ];
 
-        return $ret_object;
+        return $story;
     }
 }
