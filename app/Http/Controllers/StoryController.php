@@ -27,17 +27,19 @@ class StoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $story = Story::findorFail($id);
+        $story = Story::where(['slug'=> $slug, 'status' => 'published'])->with('user')->firstOrFail();
 
         $ret_object = [
             'id' => $story->id,
             'title' => $story->title,
             'biliner' => $story->biliner,
             'slug' => $story->slug,
+            'body' => $story->body,
             'status' => $story->status,
             'imgUrl'=> $story->getFirstMediaUrl('blog_images', 'fullscreen'),
+            'user' => $story->user,
             'created_at' => $story->created_at
         ];
 
