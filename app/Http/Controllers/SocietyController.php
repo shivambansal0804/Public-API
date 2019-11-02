@@ -16,7 +16,7 @@ class SocietyController extends Controller
      */
     public function index()
     {
-        $societies = Society::paginate(90);
+        $societies = Society::where('status','published')->get();
         $tempArr = [];
 
         foreach ($societies as $item){
@@ -60,7 +60,7 @@ class SocietyController extends Controller
      */
     public function show($id)
     {
-       $item = Society::findorFail($id);
+       $item = Society::where(['id'=> $id, 'status' => 'published'])->firstOrFail();
 
        $society_Object = [
         'id'=>$item->id,

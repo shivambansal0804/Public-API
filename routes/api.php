@@ -14,17 +14,15 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('throttle:60,1')->group(function () {
-	Route::get('stories','StoryController@index');
+	Route::get('story','StoryController@index');
 
-	Route::get('story/{id}','StoryController@show');
+	Route::get('story/{slug}','StoryController@show');
 
-	Route::get('storyImage/{storyId}','ImageController@show');
+	Route::get('gallery','GalleryController@index');
 
-	Route::get('gallery','galleryController@index');
+	Route::get('gallery/{slug}','GalleryController@show');
 
-	Route::get('gallery/{slug}','galleryController@show');
-
-	Route::get('societies','SocietyController@index');
+	Route::get('society','SocietyController@index');
 
 	Route::get('society/{id}','SocietyController@show');
 });
