@@ -31,17 +31,7 @@ class StoryController extends Controller
     {
         $story = Story::where(['slug'=> $slug, 'status' => 'published'])->with('user')->firstOrFail();
 
-        $ret_object = [
-            'id' => $story->id,
-            'title' => $story->title,
-            'biliner' => $story->biliner,
-            'slug' => $story->slug,
-            'body' => $story->body,
-            'status' => $story->status,
-            'imgUrl'=> $story->getFirstMediaUrl('blog_images', 'fullscreen'),
-            'user' => $story->user,
-            'created_at' => $story->created_at
-        ];
+        $story['imgUrl'] = $story->getFirstMediaUrl('blog_images', 'fullscreen');
 
         return $story;
     }
