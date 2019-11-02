@@ -58,9 +58,9 @@ class SocietyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-       $item = Society::where(['id'=> $id, 'status' => 'published'])->firstOrFail();
+       $item = Society::where(['slug'=> $slug, 'status' => 'published'])->firstOrFail();
 
        $society_Object = [
         'id'=>$item->id,

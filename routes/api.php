@@ -24,5 +24,5 @@ Route::middleware('throttle:60,1')->group(function () {
 
 	Route::get('society','SocietyController@index');
 
-	Route::get('society/{id}','SocietyController@show');
+	Route::get('society/{slug}','SocietyController@show');
 });
