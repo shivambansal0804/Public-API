@@ -23,6 +23,7 @@ class Story extends JsonResource
             'title' => $this->title,
             'biliner' => $this->biliner,
             'slug' => $this->slug,
+            'views' => $this->views,
             'status' => $this->status,
             'imgUrl'=> $this->getFirstMediaUrl('blog_images', 'fullscreen'),
             'created_at' => $this->created_at
