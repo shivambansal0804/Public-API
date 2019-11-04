@@ -31,12 +31,12 @@ class StoryController extends Controller
     {
         $story = Story::where(['slug'=> $slug, 'status' => 'published'])->with('user')->firstOrFail();
 
-        $previous = Story::where('id', '<', $story->id)->max('id');
-        $next = Story::where('id', '>', $story->id)->min('id');
+        $previous = Story::where('id', '<', $story->id)->whereStatus('published')->max('id');
+        $next = Story::where('id', '>', $story->id)->whereStatus('published')->min('id');
 
         $story['imgUrl'] = $story->getFirstMediaUrl('blog_images', 'fullscreen');
-        $story['next'] = $next->slug;
-        $story['prev'] = $previous->slug;
+        $story['next'] = Story::find($next);
+        $story['prev'] = Story::find($previous);
 
         return $story;
     }
