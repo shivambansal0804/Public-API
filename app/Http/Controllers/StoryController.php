@@ -34,7 +34,7 @@ class StoryController extends Controller
         $previous = Story::where('id', '<', $story->id)->whereStatus('published')->max('id');
         $next = Story::where('id', '>', $story->id)->whereStatus('published')->min('id');
         $user = User::find($story->user_id);
-        $category = Category::find($category_id);
+        $category = Category::find($story->category_id);
 
         $user['imgUrl'] = $user->getFirstMediaUrl('avatars', 'thumb');
         $story['imgUrl'] = $story->getFirstMediaUrl('blog_images', 'fullscreen');
