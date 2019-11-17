@@ -14,7 +14,7 @@ class PageController extends Controller
      */
     public function index()
     {
-        return Story::whereStatus('published')->orderBy('views')->get(20);
+        return Story::whereStatus('published')->orderBy('views')->first(10);
     }
 
     /**
