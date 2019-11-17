@@ -25,7 +25,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        return Category::where($id)->with('story')->get();
+        return Category::whereId($id)->with('story')->get();
     }
 
     /**
