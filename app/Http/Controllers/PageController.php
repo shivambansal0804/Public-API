@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Story;
+use App\Http\Resources\Story as StoryResource;
 
 class PageController extends Controller
 {
