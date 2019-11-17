@@ -41,3 +41,6 @@ class StoryController extends Controller
         return $story;
     }
 }
+
+
+

@@ -18,6 +18,8 @@ Route::middleware('throttle:60,1')->group(function () {
 
 	Route::get('story/{slug}','StoryController@show');
 
+	Route::get('category', 'CategoryController@index');
+
 	Route::get('gallery','GalleryController@index');
 
 	Route::get('gallery/{slug}','GalleryController@show');
