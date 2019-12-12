@@ -7,7 +7,7 @@ use App\Http\Requests;
 use App\Models\Album;
 
 
-class galleryController extends Controller
+class GalleryController extends Controller
 {
     /**
      * Display a listing of the resource.
