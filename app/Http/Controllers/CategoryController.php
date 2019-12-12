@@ -15,6 +15,7 @@ class CategoryController extends Controller
     public function index()
     {
         return Category::all();
+        
     }
 
     /**
@@ -25,7 +26,12 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        return Category::whereId($id)->with('story')->get();
+        $category_object =  Category::whereId($id)->with('story')->get();
+        $story_list = $category_object['story'];
+        foreach($story_list as $story){
+            $story['imgUrl'] = $story->getFirstMediaUrl('blog_images', 'fullscreen');
+        }
+        return $category_object;
     }
 
     /**
