@@ -22,10 +22,9 @@ class UserController extends Controller
 
         foreach ($users as $item){
 
-            array_push($tempArr,
-            ['info' => $item,
-            'userImg'=> $item->getFirstMediaUrl('avatar', 'avatars'),
-            ]);
+            $item['userImg'] = $item->getFirstMediaUrl('avatars', 'thumb');
+
+            array_push($tempArr,$item);
            
         }
 
@@ -44,11 +43,8 @@ class UserController extends Controller
     {
         $user = User::where(['id'=> $id, 'show' => true])->firstOrFail();
 
-        $info = [
-            'info' => $user,
-            'userImg' => $user->getFirstMediaUrl('avatar', 'avatars'),
-        ];
+        $user['userImg'] = $user->getFirstMediaUrl('avatars', 'thumb');
 
-        return $info;
+        return $user;
     }
 }
