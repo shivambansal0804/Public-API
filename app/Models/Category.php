@@ -15,6 +15,12 @@ class Category extends Model
      */
     public function story()
     {
-        return $this->hasMany('App\Models\Story');
+        $stories = $this->hasMany('App\Models\Story');
+        foreach($stories as $story){
+            $story['imgUrl'] = $story->getFirstMediaUrl('blog_images', 'fullscreen');
+        }
+        return $stories;
+
+        //return $this->hasMany('App\Models\Story');
     }
 }
