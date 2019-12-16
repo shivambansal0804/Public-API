@@ -31,4 +31,7 @@ Route::middleware('throttle:60,1')->group(function () {
 
 	Route::get('user','UserController@index');
 	Route::get('user/{id}','UserController@show');
+
+	Route::get('edition','EditionController@index');
+	Route::get('edition/{id}','EditionController@show');
 });
