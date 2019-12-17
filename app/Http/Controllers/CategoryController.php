@@ -30,7 +30,7 @@ class CategoryController extends Controller
         
       $list = [];
         $category_object =  Category::whereId($id)->get();
-        $story_list = $category_object["story"];
+        $story_list = $category_object['story'];
         foreach($story_list as $story){
             $item = Story::whereId($story->id);
             $item['imgUrl'] = $item->getFirstMediaUrl('blog_images', 'fullscreen');
