@@ -28,13 +28,15 @@ class CategoryController extends Controller
     public function show($id)
     {
         
-
+      $list = [];
         $category_object =  Category::whereId($id)->get();
-        $story_list = Story::where('category_id', $id);
+        $story_list = $category_object["story"];
         foreach($story_list as $story){
-            $story['imgUrl'] = $story->getFirstMediaUrl('blog_images', 'fullscreen');
+            $item = Story::whereId($story->id);
+            $item['imgUrl'] = $item->getFirstMediaUrl('blog_images', 'fullscreen');
+            array_push($list,$item);
         }
-        $category_object['story'] = $story_list;
+        $category_object['story'] = $list;
 
         return $category_object;
     }
