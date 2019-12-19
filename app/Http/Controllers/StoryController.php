@@ -19,8 +19,8 @@ class StoryController extends Controller
     public function index()
     {
         $stories = Story::where('status','published')->latest()->paginate(10);
-
-        return StoryResource::collection($stories);
+        return $stories;
+        return StoryResource::collection($stories); 
     }
     /**
      * Display the specified resource.
