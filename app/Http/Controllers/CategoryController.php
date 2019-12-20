@@ -31,7 +31,7 @@ class CategoryController extends Controller
         $category_object =  Category::where('id', $id)->with('story')->firstOrFail();
         $story_list = $category_object['story'];
         foreach($story_list as $story){
-            $item = Story::whereId($story->id)->first();
+            $item = Story::whereId($story->id)->exclude(['body'])->first();
             $item['imgUrl'] = $item->getFirstMediaUrl('blog_images', 'fullscreen');
             array_push($list,$item);
         }
