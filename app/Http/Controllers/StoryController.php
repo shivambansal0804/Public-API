@@ -18,9 +18,9 @@ class StoryController extends Controller
      */
     public function index()
     {
-        $stories = Story::where('status','published')->latest()->paginate(10);
-
-        return StoryResource::collection($stories);
+        $stories = Story::where('status','published')->with(['user', 'category'])->latest()->paginate(10);
+        // return $stories;
+        return StoryResource::collection($stories); 
     }
     /**
      * Display the specified resource.
@@ -46,6 +46,7 @@ class StoryController extends Controller
         return $story;
     }
 }
+
 
 
 
