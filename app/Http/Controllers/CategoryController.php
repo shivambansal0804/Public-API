@@ -27,9 +27,9 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        
+    
       $list = [];
-        $category_object =  Category::whereId($id)->with('story')->get();
+        $category_object =  Category::whereId($id)->with('story')->first();
         return $category_object;
         $story_list = $category_object['story'];
         return$story_list;
