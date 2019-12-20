@@ -29,7 +29,7 @@ class CategoryController extends Controller
     {
         
       $list = [];
-        $category_object =  Category::whereId($id)->get();
+        $category_object =  Category::whereId($id)->with('story')->get();
         $story_list = $category_object['story'];
         foreach($story_list as $story){
             $item = Story::whereId($story->id);
