@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Story;
 
 class CategoryController extends Controller
 {
@@ -26,13 +27,18 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        // $category_object =  Category::whereId($id)->with('story')->get();
-        // $story_list = $category_object['story'];
-        // foreach($story_list as $story){
-        //     $story['imgUrl'] = $story->getFirstMediaUrl('blog_images', 'fullscreen');
-        // }
-        // return $category_object;
-        return Category::whereId($id)->with('story')->get();
+        
+      $list = [];
+        $category_object =  Category::whereId($id)->get();
+        $story_list = $category_object['story'];
+        foreach($story_list as $story){
+            $item = Story::whereId($story->id);
+            $item['imgUrl'] = $item->getFirstMediaUrl('blog_images', 'fullscreen');
+            array_push($list,$item);
+        }
+        $category_object['story'] = $list;
+
+        return $category_object;
     }
 
     /**
