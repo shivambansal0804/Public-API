@@ -32,7 +32,7 @@ class CategoryController extends Controller
         $story_list = $category_object['story'];
         foreach($story_list as $story){
             $item = Story::whereId($story->id)->where('status', 'published')->first();
-            $item->makeHidden(['body']);
+            $item->makeHidden(['body', 'media']);
             $item['imgUrl'] = $item->getFirstMediaUrl('blog_images', 'fullscreen');
             array_push($list,$item);
         }
