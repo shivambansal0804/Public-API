@@ -35,9 +35,10 @@ class CategoryController extends Controller
             $item['imgUrl'] = $item->getFirstMediaUrl('blog_images', 'fullscreen');
             array_push($list,$item);
         }
-        $category_object['story'] = $list;
 
-        return $category_object;
+        // $category_object['stor'] = $list;
+
+        return $list;
     }
 
     /**
