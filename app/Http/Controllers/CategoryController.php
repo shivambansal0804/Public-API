@@ -29,7 +29,6 @@ class CategoryController extends Controller
     {
         $list = [];
         $category_object =  Category::where('id', $id)->firstOrFail();
-        $story_list = $category_object['story'];
 
         $stories = Story::where('status', 'published')->where('category_id', $id)->get();
         foreach($stories as $story){
@@ -42,7 +41,7 @@ class CategoryController extends Controller
         $result = [
             'id' => $category_object->id,
             'name' => $category_object->name,
-            'item' => $item
+            'item' => $list
         ];
 
         return $result;
