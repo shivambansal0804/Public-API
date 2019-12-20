@@ -37,8 +37,13 @@ class CategoryController extends Controller
         }
 
         // $category_object['stor'] = $list;
+        $result = [
+            'id' => $category_object->id,
+            'name' => $category_object->name,
+            'item' => $item
+        ];
 
-        return $list;
+        return $result;
     }
 
     /**
