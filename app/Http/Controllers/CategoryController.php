@@ -27,12 +27,12 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $category_object =  Category::where('id', $id)->first();
+        $category_object =  Category::find($id);
         return $category_object;
         $story_list = $category_object['story'];
         return$story_list;
         foreach($story_list as $story){
-            $item = Story::whereId($story->id);
+            $item = Story::whereId($story->id)->first();
             $item['imgUrl'] = $item->getFirstMediaUrl('blog_images', 'fullscreen');
             array_push($list,$item);
         }
