@@ -27,9 +27,8 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $category_object =  Category::where('id', $id)->with('story')->first();
-        // $story_list = $category_object['story'];
-        return $category_object;
+        $category_object =  Category::where('id', $id)->with('story')->firstOrFail();
+        $story_list = $category_object['story'];
         foreach($story_list as $story){
             $item = Story::whereId($story->id)->first();
             $item['imgUrl'] = $item->getFirstMediaUrl('blog_images', 'fullscreen');
