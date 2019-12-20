@@ -31,7 +31,7 @@ class CategoryController extends Controller
         $category_object =  Category::where('id', $id)->with('story')->firstOrFail();
         $story_list = $category_object['story'];
         foreach($story_list as $story){
-            $item = Story::whereId($story->id)->where('status', 'published')->first();
+            $item = Story::whereId($story->id)->first();
             if ($item->status != 'published') continue;
             $item->makeHidden(['body', 'media']);
             $item['imgUrl'] = $item->getFirstMediaUrl('blog_images', 'fullscreen');
