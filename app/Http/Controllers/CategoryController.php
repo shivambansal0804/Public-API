@@ -28,16 +28,16 @@ class CategoryController extends Controller
     public function show($id)
     {
         $list = [];
-        $category_object =  Category::where('id', $id)->with('story')->firstOrFail();
+        $category_object =  Category::where('id', $id)->firstOrFail();
         $story_list = $category_object['story'];
-        foreach($story_list as $story){
-            $item = Story::whereId($story->id)->first();
-            if ($item->status != 'published') continue;
-            $item->makeHidden(['body', 'media']);
-            $item['imgUrl'] = $item->getFirstMediaUrl('blog_images', 'fullscreen');
-            array_push($list,$item);
-        }
 
+        $stories = Story::where('status', 'published')->where('category_id', $id)->get();
+        foreach($stories as $story){
+            // if ($item->status != 'published') continue;
+            $story->makeHidden(['body', 'media']);
+            $story['imgUrl'] = $story->getFirstMediaUrl('blog_images', 'fullscreen');
+            array_push($list,$story);
+        }
         // $category_object['stor'] = $list;
         $result = [
             'id' => $category_object->id,
