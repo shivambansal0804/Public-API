@@ -34,4 +34,9 @@ Route::middleware('throttle:60,1')->group(function () {
 
 	Route::get('edition','EditionController@index');
 	Route::get('edition/{id}','EditionController@show');
+
+	Route::get('instagram','InstagramController@index');
+	Route::get('instagram/media','InstagramController@mediaIndex');
+	Route::get('instagram/media/{id}','InstagramController@mediaShow');
+
 });
