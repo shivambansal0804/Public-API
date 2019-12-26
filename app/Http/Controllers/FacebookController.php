@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class InstagramController extends Controller
+class FacebookController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,6 @@ class InstagramController extends Controller
      */
     public function index()
     {
-
         $fb = new \Facebook\Facebook([
           'app_id' => env('APP_ID'), 
           'app_secret' => env('APP_SECRET'),
@@ -35,45 +34,23 @@ class InstagramController extends Controller
         }
         $fbpage = $response->getGraphNode();
 
-        $req = strval($fbpage["id"])."?fields=instagram_business_account" ;
+        $req = strval($fbpage["id"])."?fields=fan_count,category,description,cover,emails,id,link,location,members,name,release_date,website" ;
 
-        try {
-          // Returns a `FacebookFacebookResponse` object
-          $response = $fb->get(
-            $req,
-            env('ACCESS_TOKEN')
-          );
-        } catch(FacebookExceptionsFacebookResponseException $e) {
-          echo 'Graph returned an error: ' . $e->getMessage();
-          exit;
-        } catch(FacebookExceptionsFacebookSDKException $e) {
-          echo 'Facebook SDK returned an error: ' . $e->getMessage();
-          exit;
-        }
+          try {
+            // Returns a `FacebookFacebookResponse` object
+            $response = $fb->get( $req, env('ACCESS_TOKEN'));
 
-        $fbpage = $response->getGraphNode();
+          } catch(FacebookExceptionsFacebookResponseException $e) {
+            echo 'Graph returned an error: ' . $e->getMessage();
+            exit;
+          } catch(FacebookExceptionsFacebookSDKException $e) {
+            echo 'Facebook SDK returned an error: ' . $e->getMessage();
+            exit;
+          }
+          $fbpage = $response->getGraphNode();
 
-        $igUserId = strval($fbpage['instagram_business_account']['id']);
+          return $fbpage;
 
-        $req = $igUserId.'?fields=biography,followers_count,follows_count,id,media_count,name,profile_picture_url,username,website';
-
-        try {
-          // Returns a `FacebookFacebookResponse` object
-          $response = $fb->get(
-            $req,
-            env('ACCESS_TOKEN')
-          );
-        } catch(FacebookExceptionsFacebookResponseException $e) {
-          echo 'Graph returned an error: ' . $e->getMessage();
-          exit;
-        } catch(FacebookExceptionsFacebookSDKException $e) {
-          echo 'Facebook SDK returned an error: ' . $e->getMessage();
-          exit;
-        }
-
-        $instapage = $response->getGraphNode();
-
-        return $instapage;
     }
 
     /**
@@ -165,27 +142,7 @@ class InstagramController extends Controller
         }
         $fbpage = $response->getGraphNode();
 
-        $req = strval($fbpage["id"])."?fields=instagram_business_account" ;
-
-        try {
-          // Returns a `FacebookFacebookResponse` object
-          $response = $fb->get(
-            $req,
-            env('ACCESS_TOKEN')
-          );
-        } catch(FacebookExceptionsFacebookResponseException $e) {
-          echo 'Graph returned an error: ' . $e->getMessage();
-          exit;
-        } catch(FacebookExceptionsFacebookSDKException $e) {
-          echo 'Facebook SDK returned an error: ' . $e->getMessage();
-          exit;
-        }
-
-        $fbpage = $response->getGraphNode();
-
-        $igUserId = strval($fbpage['instagram_business_account']['id']);
-
-        $req = $igUserId.'/media?fields=caption,comments_count,id,like_count,media_url,permalink,timestamp&limit=10';
+        $req = strval($fbpage["id"])."/posts?fields=created_time,full_picture,story,message,status_type,permalink_url,id,shares&limit=10" ;
 
         try {
           // Returns a `FacebookFacebookResponse` object
@@ -208,7 +165,7 @@ class InstagramController extends Controller
 
     public function postShow($id)
     {
-        $req = $id.'?fields=caption,comments_count,id,like_count,media_type,media_url,permalink,timestamp,children{media_url},comments.limit(10){text,media,like_count,timestamp,username,replies.limit(10){text,media,like_count,timestamp,username}}';
+        $req = $id.'?fields=message,message_tags,full_picture,created_time,likes.limit(10){name,pic},comments.limit(10){message,like_count,user_likes,comments.limit(10){message},comment_count,reactions},attachments.limit(10){description,description_tags,media,media_type,title,type,unshimmed_url,url},reactions.limit(10){name,pic},shares,sharedposts.limit(10){message,full_picture,link},story,status_type,story_tags,place,updated_time,actions,event,to.limit(10){link,name,pic},with_tags.limit(10){link,name,pic}';
 
         $fb = new \Facebook\Facebook([
           'app_id' => env('APP_ID'), 
@@ -230,8 +187,8 @@ class InstagramController extends Controller
           exit;
         }
 
-        $post = $response->getGraphNode();
+        $media = $response->getGraphNode();
 
-        return $post;
+        return $media;
     }
 }
