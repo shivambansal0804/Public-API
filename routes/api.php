@@ -34,4 +34,7 @@ Route::middleware('throttle:60,1')->group(function () {
 
 	Route::get('edition','EditionController@index');
 	Route::get('edition/{id}','EditionController@show');
+
+	Route::get('device', 'DeviceTokenController@index');
+	Route::post('device', 'DeviceTokenController@store');
 });
