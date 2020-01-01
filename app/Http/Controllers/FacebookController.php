@@ -34,7 +34,7 @@ class FacebookController extends Controller
         }
         $fbpage = $response->getGraphNode();
 
-        $req = strval($fbpage["id"])."?fields=fan_count,permalink_url,category,description,cover,emails,id,link,location,members,name,release_date,website" ;
+        $req = strval($fbpage["id"])."?fields=fan_count,category,description,cover,emails,id,link,location,members,name,release_date,website" ;
 
           try {
             // Returns a `FacebookFacebookResponse` object
@@ -165,7 +165,7 @@ class FacebookController extends Controller
 
     public function postShow($id)
     {
-        $req = $id.'?fields=message,message_tags,full_picture,created_time,likes.limit(10){name,pic},comments.limit(10){message,like_count,user_likes,comments.limit(10){message},comment_count,reactions},attachments.limit(10){description,description_tags,media,media_type,title,type,unshimmed_url,url},reactions.limit(10){name,pic},shares,sharedposts.limit(10){message,full_picture,link},story,status_type,story_tags,place,updated_time,actions,event,to.limit(10){link,name,pic},with_tags.limit(10){link,name,pic}';
+        $req = $id.'?fields=message,message_tags,,permalink_url,full_picture,created_time,likes.limit(10){name,pic},comments.limit(10){message,like_count,user_likes,comments.limit(10){message},comment_count,reactions},attachments.limit(10){description,description_tags,media,media_type,title,type,unshimmed_url,url},reactions.limit(10){name,pic},shares,sharedposts.limit(10){message,full_picture,link},story,status_type,story_tags,place,updated_time,actions,event,to.limit(10){link,name,pic},with_tags.limit(10){link,name,pic}';
 
         $fb = new \Facebook\Facebook([
           'app_id' => env('APP_ID'), 
