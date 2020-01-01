@@ -34,7 +34,7 @@ class FacebookController extends Controller
         }
         $fbpage = $response->getGraphNode();
 
-        $req = strval($fbpage["id"])."?fields=fan_count,category,description,cover,emails,id,link,location,members,name,release_date,website" ;
+        $req = strval($fbpage["id"])."?fields=fan_count,permalink_url,category,description,cover,emails,id,link,location,members,name,release_date,website" ;
 
           try {
             // Returns a `FacebookFacebookResponse` object
