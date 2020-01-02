@@ -9,7 +9,7 @@ class SubscriberController extends Controller
 {
     public function index()
     {
-        return Subscriber::get()->latest();
+        return Subscriber::latest()->get();
     }
 
     public function store(StoreSubscriber $request)
