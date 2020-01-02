@@ -15,7 +15,6 @@ class DeviceTokenController extends Controller
 
     public function store(StoreDeviceToken $request)
     {
-        return 1;
         $device = DeviceToken::create($request->all());
 
         return $device;
