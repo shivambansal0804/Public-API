@@ -14,7 +14,6 @@ class SubscriberController extends Controller
 
     public function store(StoreSubscriber $request)
     {
-        return 1;
         return Subscriber::create([
             'email' => $request->email
         ]);
