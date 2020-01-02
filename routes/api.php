@@ -43,7 +43,7 @@ Route::middleware('throttle:60,1')->group(function () {
 	Route::get('facebook/post','FacebookController@postindex');
 	Route::get('facebook/post/{id}','FacebookController@postShow');
 
-	// Route::get('device', 'DeviceTokenController@index');
+	Route::get('device', 'DeviceTokenController@index');
 	Route::post('device', 'DeviceTokenController@store');
 
 	Route::get('/subscriber', 'SubscriberController@index');
