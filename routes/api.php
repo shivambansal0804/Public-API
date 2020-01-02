@@ -46,4 +46,7 @@ Route::middleware('throttle:60,1')->group(function () {
 	Route::get('device', 'DeviceTokenController@index');
 	Route::post('device', 'DeviceTokenController@store');
 
+	Route::get('/subscriber', 'SubscriberController@index');
+	Route::post('/subscriber', 'SubscriberController@store');
+
 });
