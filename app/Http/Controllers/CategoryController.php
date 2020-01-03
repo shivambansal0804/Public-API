@@ -30,7 +30,7 @@ class CategoryController extends Controller
         $list = [];
         $category_object =  Category::where('id', $id)->firstOrFail();
 
-        $stories = Story::where('status', 'published')->where('category_id', $id)->latest()->get();
+        $stories = Story::where('status', 'published')->where('category_id', $id)->latest()->paginate(10);
         foreach($stories as $story){
             // if ($item->status != 'published') continue;
             $story->makeHidden(['body', 'media']);
