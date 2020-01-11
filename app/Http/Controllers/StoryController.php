@@ -20,7 +20,7 @@ class StoryController extends Controller
     {
         $stories = Story::where('status','published')->with(['user', 'category'])->latest()->paginate(10);
         // return $stories;
-        return StoryResource::collection($stories); 
+        return StoryResource::collection($stories);
     }
     /**
      * Display the specified resource.
