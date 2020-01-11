@@ -34,4 +34,19 @@ Route::middleware('throttle:60,1')->group(function () {
 
 	Route::get('edition','EditionController@index');
 	Route::get('edition/{id}','EditionController@show');
+
+	Route::get('instagram','InstagramController@index');
+	Route::get('instagram/post','InstagramController@postIndex');
+	Route::get('instagram/post/{id}','InstagramController@postShow');
+
+	Route::get('facebook','FacebookController@index');
+	Route::get('facebook/post','FacebookController@postindex');
+	Route::get('facebook/post/{id}','FacebookController@postShow');
+
+	Route::get('device', 'DeviceTokenController@index');
+	Route::post('device', 'DeviceTokenController@store');
+
+	Route::get('/subscriber', 'SubscriberController@index');
+	Route::post('/subscriber', 'SubscriberController@store');
+
 });
