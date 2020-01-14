@@ -1,9 +1,6 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-
 class FacebookController extends Controller
 {
     /**
@@ -18,7 +15,6 @@ class FacebookController extends Controller
           'app_secret' => env('APP_SECRET'),
           'default_graph_version' => 'v5.0',
           ]);
-
         try {
           // Returns a `FacebookFacebookResponse` object
           $response = $fb->get(
@@ -33,13 +29,10 @@ class FacebookController extends Controller
           exit;
         }
         $fbpage = $response->getGraphNode();
-
         $req = strval($fbpage["id"])."?fields=fan_count,category,description,cover,emails,id,link,location,members,name,release_date,website" ;
-
           try {
             // Returns a `FacebookFacebookResponse` object
             $response = $fb->get( $req, env('ACCESS_TOKEN'));
-
           } catch(FacebookExceptionsFacebookResponseException $e) {
             echo 'Graph returned an error: ' . $e->getMessage();
             exit;
@@ -48,11 +41,8 @@ class FacebookController extends Controller
             exit;
           }
           $fbpage = $response->getGraphNode();
-
           return $fbpage;
-
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -62,7 +52,6 @@ class FacebookController extends Controller
     {
         //
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -73,7 +62,6 @@ class FacebookController extends Controller
     {
         //
     }
-
     /**
      * Display the specified resource.
      *
@@ -84,7 +72,6 @@ class FacebookController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -95,7 +82,6 @@ class FacebookController extends Controller
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -107,7 +93,6 @@ class FacebookController extends Controller
     {
         //
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -118,7 +103,6 @@ class FacebookController extends Controller
     {
         //
     }
-
     public function postIndex()
     {
         $fb = new \Facebook\Facebook([
@@ -126,7 +110,6 @@ class FacebookController extends Controller
           'app_secret' => env('APP_SECRET'),
           'default_graph_version' => 'v5.0',
           ]);
-
         try {
           // Returns a `FacebookFacebookResponse` object
           $response = $fb->get(
@@ -141,9 +124,7 @@ class FacebookController extends Controller
           exit;
         }
         $fbpage = $response->getGraphNode();
-
         $req = strval($fbpage["id"])."/posts?fields=created_time,full_picture,story,message,status_type,permalink_url,id,shares&limit=10" ;
-
         try {
           // Returns a `FacebookFacebookResponse` object
           $response = $fb->get(
@@ -157,22 +138,17 @@ class FacebookController extends Controller
           echo 'Facebook SDK returned an error: ' . $e->getMessage();
           exit;
         }
-
         $posts = $response->getGraphEdge();
-
         return $posts;   
     }
-
     public function postShow($id)
     {
         $req = $id.'?fields=message,message_tags,permalink_url,full_picture,created_time,likes.limit(10){name,pic},comments.limit(10){message,like_count,user_likes,comments.limit(10){message},comment_count,reactions},attachments.limit(10){description,description_tags,media,media_type,title,type,unshimmed_url,url},reactions.limit(10){name,pic},shares,sharedposts.limit(10){message,full_picture,link},story,status_type,story_tags,place,updated_time,actions,event,to.limit(10){link,name,pic},with_tags.limit(10){link,name,pic}';
-
         $fb = new \Facebook\Facebook([
           'app_id' => env('APP_ID'), 
           'app_secret' => env('APP_SECRET'),
           'default_graph_version' => 'v5.0',
           ]);
-
         try {
           // Returns a `FacebookFacebookResponse` object
           $response = $fb->get(
@@ -186,9 +162,7 @@ class FacebookController extends Controller
           echo 'Facebook SDK returned an error: ' . $e->getMessage();
           exit;
         }
-
         $media = $response->getGraphNode();
-
         return $media;
     }
 }
