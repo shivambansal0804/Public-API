@@ -49,4 +49,6 @@ Route::middleware('throttle:60,1')->group(function () {
 	Route::get('/subscriber', 'SubscriberController@index');
 	Route::post('/subscriber', 'SubscriberController@store');
 
+	Route::get('notification','NotificationController@index');
+
 });

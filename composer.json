@@ -12,6 +12,7 @@
         "ext-exif": "*",
         "ext-gd": "*",
         "barryvdh/laravel-cors": "^0.11.4",
+        "davibennun/laravel-push-notification": "dev-laravel5",
         "facebook/graph-sdk": "^5.7",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^6.3",
@@ -20,6 +21,7 @@
         "nesbot/carbon": "1.32.0 as 1.25",
         "nunomaduro/collision": "^3.0",
         "pusher/pusher-php-server": "^3.2",
+        "pusher/pusher-push-notifications": "^1.1",
         "santigarcor/laratrust": "5.0.*",
         "spatie/laravel-analytics": "^3.6",
         "spatie/laravel-medialibrary": "^7.0.0"
