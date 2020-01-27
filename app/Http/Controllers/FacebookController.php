@@ -124,7 +124,7 @@ class FacebookController extends Controller
           exit;
         }
         $fbpage = $response->getGraphNode();
-        $req = strval($fbpage["id"])."/posts?fields=created_time,full_picture,story,message,status_type,permalink_url,id,shares&limit=10" ;
+        $req = strval($fbpage["id"])."/posts?fields=created_time,full_picture,story,message,status_type,permalink_url,id,shares&limit=40" ;
         try {
           // Returns a `FacebookFacebookResponse` object
           $response = $fb->get(
