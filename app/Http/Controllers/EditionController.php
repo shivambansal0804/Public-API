@@ -14,7 +14,7 @@ class EditionController extends Controller
      */
     public function index()
     {
-        $editions = Edition::orderBy('id')->get();
+        $editions = Edition::orderBy('sID')->get();
         foreach( $editions as $edition ){
             $edition['imgUrl'] = $edition->getFirstMediaUrl('covers', 'cover');
         }
